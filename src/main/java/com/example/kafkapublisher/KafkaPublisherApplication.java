@@ -25,6 +25,13 @@ public class KafkaPublisherApplication {
         return "Data published at " + LocalDateTime.now();
     }
 
+    @GetMapping("/publishJson")
+    public String publishMessage() {
+        User user = new User(123, "NewUserName", new String[] {"Santiago", "Chile"});
+        template.send(TOPIC_NAME, user);
+        return "Data published at " + LocalDateTime.now();
+    }
+
     public static void main(String[] args) {
         SpringApplication.run(KafkaPublisherApplication.class, args);
     }
